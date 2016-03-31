@@ -10,7 +10,7 @@ module.exports = {
     weekDayNames: getWeekDayNames,
 
     //the day to display as first day of week. defaults to 0, which is sunday
-    weekStartDay: null,
+    weekStartDay: 1,
 
     locale: null,
 
@@ -50,5 +50,7 @@ module.exports = {
     onRenderDay: null,
     renderDay: null,
 
-    alwaysShowPrevWeek: false
+    alwaysShowPrevWeek: false,
+
+    grayElapsedDays: true
 }

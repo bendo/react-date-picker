@@ -22,14 +22,6 @@ var TODAY = {
     ro: 'Azi'
 }
 
-var GO2SELECTED = {
-    en: 'Go to selected',
-    es: 'Vaya a Favoritos',
-    de: 'Zum ausgewählten',
-    fr: 'Aller a la liste',
-    ro: 'Mergi la selectie'
-}
-
 function emptyFn(){}
 
 var App = React.createClass({

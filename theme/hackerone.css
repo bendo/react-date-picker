@@ -8,6 +8,7 @@
 .date-picker {
   overflow: hidden;
   background: #fff;
+  padding: 5px;
   font-size: 14px;
   width: 100%;
   height: 100%;
@@ -15,7 +16,7 @@
   border-radius: 4px;
 }
 .date-picker .dp-header {
-  background: #f0f0f0;
+  background: #fff;
 }
 .date-picker .dp-header .dp-cell {
   color: #000;
@@ -30,7 +31,7 @@
   border-top: 0 solid transparent;
 }
 .date-picker .dp-table .dp-row.dp-week-day-names {
-  background: #f0f0f0;
+  background: #fff;
   border-bottom: 1px solid #aeaeae;
   border-top: none;
   color: #000;
@@ -39,27 +40,23 @@
   cursor: pointer;
   padding: 0;
   background: inherit;
-  border-radius: 4px;
+  border-radius: 0;
   margin: 2px;
 }
-.date-picker .dp-table .dp-cell:not(:first-child) {
-  border-left: 0 solid transparent;
+.date-picker .dp-table .dp-cell:first-child {
+  border-radius: 0;
+  margin: 0;
+  border-right: 1px solid #aeaeae;
 }
 .date-picker .dp-table .dp-cell.dp-weeknumber,
 .date-picker .dp-table .dp-cell.dp-weeknumber:hover {
-  color: #8d8d8d;
   background: none;
   cursor: auto;
-}
-.date-picker .dp-table .dp-cell.dp-prev,
-.date-picker .dp-table .dp-cell.dp-next {
-  color: #5c5c5c;
-  background: inherit;
 }
 .date-picker .dp-table .dp-cell:hover {
   color: inherit;
   font-weight: inherit;
-  background: #f0f0f0;
+  background: #fff;
 }
 .date-picker .dp-table .dp-cell.dp-disabled {
   cursor: default;
@@ -69,7 +66,7 @@
 .date-picker .dp-table .dp-cell.dp-value {
   color: #fff;
   font-weight: normal;
-  background: #2e99eb;
+  background: #1b6aad;
 }
 .date-picker .dp-table .dp-cell.dp-current {
   font-weight: bold;
@@ -85,12 +82,10 @@
 .date-picker .dp-table .dp-cell.dp-week-day-name {
   cursor: default;
   background: inherit;
-  border: none;
 }
 .date-picker .dp-footer {
   padding: 3px;
-  justify-content: center;
-  border-top: 1px solid #aeaeae;
+  justify-content: flex-end;
 }
 .date-picker .dp-footer .dp-footer-selected,
 .date-picker .dp-footer .dp-footer-today {
@@ -120,15 +115,15 @@
   overflow: hidden;
   touch-callout: none;
   user-select: none;
+  font-weight: bold;
 }
 .date-picker .dp-nav-view,
 .date-picker .dp-nav-cell {
   cursor: pointer;
 }
 .date-picker .dp-nav-table .dp-nav-cell.dp-cell {
-  border: 10px solid transparent;
-  padding: 0;
-  margin-top: 5px;
+  font-size: 25px;
+  margin: 5px;
   width: 0;
   height: 0;
 }
@@ -148,7 +143,7 @@
   background: inherit;
 }
 .date-picker .dp-nav-view:hover {
-  background: #f0f0f0;
+  background: #fff;
 }
 .date-picker .dp-nav-table .dp-cell {
   padding: 8px;
@@ -164,4 +159,7 @@
 .date-picker .dp-month-view {
   touch-callout: none;
   user-select: none;
+}
+.date-picker .dp-day.elapsed {
+  color: #ccc;
 }

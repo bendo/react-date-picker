@@ -30,11 +30,6 @@
 .date-picker .dp-table .dp-cell:not(:first-child) {
   border-left: 1px solid #a8a8a8;
 }
-.date-picker .dp-table .dp-cell.dp-prev,
-.date-picker .dp-table .dp-cell.dp-next {
-  color: #5c5c5c;
-  background: inherit;
-}
 .date-picker .dp-table .dp-cell:hover {
   color: inherit;
   font-weight: inherit;
@@ -136,6 +131,10 @@
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+.date-picker .dp-weekend.dp-weekend-highlight.elapsed,
+.date-picker .dp-weekend.dp-weekend-highlight.dp-value.elapsed {
+  color: #ccc;
 }
 .date-picker {
   display: -webkit-box;

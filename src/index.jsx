@@ -32,7 +32,7 @@ var DatePicker = React.createClass({
 
     propTypes: {
         todayText: React.PropTypes.string,
-        gotoSelectedText: React.PropTypes.string,
+        closeText: React.PropTypes.string,
 
         renderFooter: React.PropTypes.func,
         onChange: React.PropTypes.func,
@@ -232,18 +232,15 @@ var DatePicker = React.createClass({
         if (this.props.today){
             console.warn('Please use "todayText" prop instead of "today"!')
         }
-        if (this.props.gotoSelected){
-            console.warn('Please use "gotoSelectedText" prop instead of "gotoSelected"!')
-        }
 
         var todayText        = this.props.todayText || 'Today'
-        var gotoSelectedText = this.props.gotoSelectedText || 'Go to selected'
+        var closeText        = this.props.closeText || 'Close'
 
         var footerProps = {
             todayText       : todayText,
-            gotoSelectedText: gotoSelectedText,
+            closeText       : closeText,
             gotoToday       : this.gotoNow,
-            gotoSelected    : this.gotoSelected.bind(this, props),
+            close           : this.close.bind(this, props),
             date            : props.date,
             viewDate        : props.viewDate
         }
@@ -258,26 +255,26 @@ var DatePicker = React.createClass({
         }
 
         return (
-            <div className="dp-footer">
-                <div
-                    tabIndex="1"
-                    role="link"
-                    className="dp-footer-today"
-                    onClick={footerProps.gotoToday}
-                    onKeyUp={onEnter(footerProps.gotoToday)}
-                >
-                    {todayText}
-                </div>
-                <div
-                    tabIndex="1"
-                    role="link"
-                    className="dp-footer-selected"
-                    onClick={footerProps.gotoSelected}
-                    onKeyUp={onEnter(footerProps.gotoSelected)}
-                >
-                    {gotoSelectedText}
-                </div>
+          <div className="dp-footer">
+            <div
+              tabIndex="1"
+              role="link"
+              className="dp-footer-today"
+              onClick={footerProps.gotoToday}
+              onKeyUp={onEnter(footerProps.gotoToday)}
+            >
+              {todayText}
             </div>
+            <div
+              tabIndex="2"
+              role="link"
+              className="dp-footer-close"
+              onClick={footerProps.close}
+              onKeyUp={onEnter(footerProps.close)}
+            >
+              {closeText}
+            </div>
+          </div>
         )
     },
 
@@ -285,8 +282,8 @@ var DatePicker = React.createClass({
         this.gotoDate(+new Date())
     },
 
-    gotoSelected: function(props) {
-        this.gotoDate(props.date || +new Date())
+    close: function() {
+      window.console.log('close')
     },
 
     gotoDate: function(value) {

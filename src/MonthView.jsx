@@ -224,7 +224,6 @@ var MonthView = React.createClass({
       classes.push('dp-next')
     }
 
-
     if (props.minDate && date < props.minDate){
       classes.push('dp-disabled dp-before-min')
       beforeMinDate = true
@@ -264,6 +263,10 @@ var MonthView = React.createClass({
     if (weekDay === 0 /* Sunday */ || weekDay === 6 /* Saturday */){
       classes.push('dp-weekend')
       props.highlightWeekends && classes.push('dp-weekend-highlight')
+    }
+
+    if (this.props.grayElapsedDays && dateTimestamp < TODAY) {
+      classes.push('elapsed')
     }
 
     var renderDayProps = {

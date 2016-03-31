@@ -11,6 +11,7 @@
 .date-picker
   overflow hidden
   background white
+  padding 5px
   font-size $dp-datepicker-font-size
   width $dp-datepicker-width
   height $dp-datepicker-height
@@ -42,18 +43,15 @@
       border-radius $dp-datepicker-day-border-radius
       margin $dp-datepicker-day-margin
 
-      &:not(:first-child)
-        border-left $dp-datepicker-cell-border-width $dp-datepicker-cell-border-style $dp-datepicker-cell-border-color
+      &:first-child
+        border-radius 0
+        margin 0
+        border-right $dp-datepicker-border-width $dp-datepicker-border-style $dp-datepicker-border-color
 
       &.dp-weeknumber
       &.dp-weeknumber:hover
-        color lighten($dp-datepicker-day-other-month-color, 30%)
         background none
         cursor auto
-      &.dp-prev
-      &.dp-next
-        color $dp-datepicker-day-other-month-color
-        background $dp-datepicker-day-other-month-bg
 
       &:hover
         color $dp-datepicker-cell-over-color
@@ -72,6 +70,7 @@
 
       &.dp-current
         font-weight $dp-datepicker-today-font-weight
+        background $dp-datepicker-today-color
 
       &.dp-in-range
         background $dp-datepicker-value-selected-range-bg
@@ -82,18 +81,24 @@
       &.dp-week-day-name
         cursor default
         background inherit
-        border $dp-datepicker-week-day-name-border
 
   .dp-footer
     padding 3px
-    justify-content center
-    border-top $dp-datepicker-border-width $dp-datepicker-border-style $dp-datepicker-border-color
+    justify-content flex-end
 
     .dp-footer-selected
     .dp-footer-today
       padding 5px 15px
       border-width 1px
       cursor pointer
+      color #1b6aad
+
+    .dp-footer-selected
+    .dp-footer-close
+      padding 5px 15px
+      border-width 1px
+      cursor pointer
+      color #cccccc
 
   .dp-body
     overflow hidden
@@ -113,15 +118,15 @@
   .dp-week-day-name
     ellipsis true
     unselectable true
+    font-weight bold
 
   .dp-nav-view
   .dp-nav-cell
     cursor pointer
 
   .dp-nav-table .dp-nav-cell.dp-cell
-    border $dp-datepicker-header-cell-border
-    padding 0
-    margin-top 5px
+    font-size 25px
+    margin 5px
     width 0
     height 0
     &.dp-prev-nav
@@ -151,3 +156,6 @@
   .dp-year-view
   .dp-month-view
     unselectable true
+
+  .dp-day.elapsed
+    color $dp-datepicker-elapsed-color

@@ -32,11 +32,6 @@
       &:not(:first-child)
         border-left $dp-datepicker-border-width $dp-datepicker-border-style $dp-datepicker-border-color
 
-      &.dp-prev
-      &.dp-next
-        color $dp-datepicker-day-other-month-color
-        background $dp-datepicker-day-other-month-bg
-
       &:hover
         color $dp-datepicker-cell-over-color
         font-weight $dp-datepicker-cell-over-font-weight
@@ -81,6 +76,7 @@
       padding 5px 15px
       border-width 1px
       cursor pointer
+      color #1b6aad
 
   .dp-body
     overflow hidden
@@ -122,3 +118,7 @@
   .dp-year-view
   .dp-month-view
     unselectable true
+
+  .dp-weekend.dp-weekend-highlight.elapsed
+  .dp-weekend.dp-weekend-highlight.dp-value.elapsed
+    color $dp-datepicker-elapsed-color
