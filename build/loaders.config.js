@@ -27,4 +27,4 @@ module.exports = [
     test: /\.png$/,
     loader: 'url?mimetype=image/png'
   }
-]
+];

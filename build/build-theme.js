@@ -1,6 +1,6 @@
 'use strict';
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 
 module.exports = function(themeName){
@@ -28,4 +28,4 @@ module.exports = function(themeName){
       new ExtractTextPlugin(themeName + '.css')
     ]
   }
-}
+};

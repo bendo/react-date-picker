@@ -1,6 +1,6 @@
 'use strict';
 
-var entry = require('./entry')
+var entry = require('./entry');
 
 module.exports = {
     entry: entry,
@@ -21,4 +21,4 @@ module.exports = {
         // Allow to omit extensions when requiring these files
         extensions: ['', '.js', '.jsx']
     }
-}
+};

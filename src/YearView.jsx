@@ -1,24 +1,22 @@
-'use strict'
+import React from 'react';
+import moment from 'moment';
+import isInRange from './utils/isInRange';
+import assign from 'object-assign';
+import onEnter from './onEnter';
+import asConfig from './utils/asConfig';
+import FORMAT from './utils/format';
+import toMoment from './toMoment';
 
-var React  = require('react')
-var moment = require('moment')
+var TODAY;
 
-var FORMAT   = require('./utils/format')
-var asConfig = require('./utils/asConfig')
-var toMoment = require('./toMoment')
-var onEnter  = require('./onEnter')
-var assign   = require('object-assign')
-var isInRange = require('./utils/isInRange')
-
-var TODAY
-
-function emptyFn(){}
+function emptyFn() {
+}
 
 var YearView = React.createClass({
 
     displayName: 'YearView',
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
 
         return asConfig()
     },
@@ -29,32 +27,32 @@ var YearView = React.createClass({
      * @param  {Moment/Date/Number} value
      * @return {Moment[]}
      */
-    getMonthsInYear: function(value){
-        var start = moment(value).startOf('year')
-        var result = []
-        var i = 0
+    getMonthsInYear: function (value) {
+        var start = moment(value).startOf('year');
+        var result = [];
+        var i = 0;
 
-        for (; i < 12; i++){
-            result.push(moment(start))
+        for (; i < 12; i++) {
+            result.push(moment(start));
             start.add(1, 'month')
         }
 
         return result
     },
 
-    render: function() {
+    render: function () {
 
-        TODAY = +moment().startOf('day')
+        TODAY = +moment().startOf('day');
 
-        var props = assign({}, this.props)
+        var props = assign({}, this.props);
 
-        var viewMoment = props.viewMoment = moment(this.props.viewDate)
+        var viewMoment = props.viewMoment = moment(this.props.viewDate);
 
-        if (!this.props.range){
+        if (!this.props.range) {
             props.moment = moment(props.date).startOf('month')
         }
 
-        var monthsInView = this.getMonthsInYear(viewMoment)
+        var monthsInView = this.getMonthsInYear(viewMoment);
 
         return (
             <div className="dp-table dp-year-view">
@@ -63,56 +61,51 @@ var YearView = React.createClass({
         )
     },
 
-    /**
-     * Render the given array of days
-     * @param  {Moment[]} days
-     * @return {React.DOM}
-     */
-    renderMonths: function(props, days) {
-        var nodes      = days.map(function(date){
+    renderMonths: function (props, days) {
+        var nodes = days.map(function (date) {
             return this.renderMonth(props, date)
-        }, this)
-        var len        = days.length
-        var buckets    = []
-        var bucketsLen = Math.ceil(len / 4)
+        }, this);
+        var len = days.length;
+        var buckets = [];
+        var bucketsLen = Math.ceil(len / 4);
 
-        var i = 0
+        var i = 0;
 
-        for ( ; i < bucketsLen; i++){
+        for (; i < bucketsLen; i++) {
             buckets.push(nodes.slice(i * 4, (i + 1) * 4))
         }
 
-        return buckets.map(function(bucket, i){
+        return buckets.map(function (bucket, i) {
             return <div key={"row" + i} className="dp-row">{bucket}</div>
         })
     },
 
-    renderMonth: function(props, date) {
-        var monthText = FORMAT.month(date, props.monthFormat)
-        var classes = ["dp-cell dp-month"]
+    renderMonth: function (props, date) {
+        var monthText = FORMAT.month(date, props.monthFormat);
+        var classes = ["dp-cell dp-month"];
 
-        var dateTimestamp = +date
+        var dateTimestamp = +date;
 
-        if (props.range){
-          const start = date
-          const end = moment(start).endOf('month')
+        if (props.range) {
+            const start = date;
+            const end = moment(start).endOf('month');
 
-          const [rangeStart, rangeEnd] = props.range
+            const [rangeStart, rangeEnd] = props.range;
 
-          if (
-            isInRange(start, props.range) ||
-            isInRange(end, props.range) ||
-            rangeStart && isInRange(rangeStart, [start, end]) ||
-            rangeEnd && isInRange(rangeEnd, [start, end])
-          ){
-            classes.push('dp-in-range')
-          }
+            if (
+                isInRange(start, props.range) ||
+                isInRange(end, props.range) ||
+                rangeStart && isInRange(rangeStart, [start, end]) ||
+                rangeEnd && isInRange(rangeEnd, [start, end])
+            ) {
+                classes.push('dp-in-range')
+            }
         }
 
-        if (dateTimestamp == props.moment){
+        if (dateTimestamp == props.moment) {
             classes.push('dp-value')
         }
-        var onClick = this.handleClick.bind(this, props, date)
+        var onClick = this.handleClick.bind(this, props, date);
 
         return (
             <div
@@ -128,15 +121,16 @@ var YearView = React.createClass({
         )
     },
 
-    handleClick: function(props, date, event) {
+    handleClick: function (props, date, event) {
         event.target.value = date
 
-        ;(props.onSelect || emptyFn)(date, event)
+        ;
+        (props.onSelect || emptyFn)(date, event)
     }
-})
+});
 
-YearView.getHeaderText = function(moment, props) {
-    return toMoment(moment, null, { locale: props.locale }).format('YYYY')
-}
+YearView.getHeaderText = function (moment, props) {
+    return toMoment(moment, null, {locale: props.locale}).format('YYYY')
+};
 
-module.exports = YearView
+module.exports = YearView;

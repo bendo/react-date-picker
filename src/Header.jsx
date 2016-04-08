@@ -1,56 +1,51 @@
-'use strict';
+import React, {PropTypes} from 'react';
+import onEnter from './onEnter';
 
-var React = require('react')
-var P = React.PropTypes
-var onEnter = require('./onEnter')
+export default React.createClass({
 
-module.exports = React.createClass({
+    displayName: 'DatePickerHeader',
 
-  displayName: 'DatePickerHeader',
+    propTypes: {
+        onChange: PropTypes.func,
+        onPrev: PropTypes.func,
+        onNext: PropTypes.func,
+        colspan: PropTypes.number,
+        children: PropTypes.node
+    },
 
-  propTypes: {
-    onChange: P.func,
-    onPrev  : P.func,
-    onNext  : P.func,
-    colspan : P.number,
-    children: P.node
-  },
+    render: function () {
+        const {onPrev, onNext, prevText, nextText, children, colspan, onChange} = this.props;
 
-  render: function() {
+        return <div className="dp-header">
+            <div className="dp-nav-table">
+                <div className="dp-row">
+                    <div
+                        tabIndex="1"
+                        role="link"
+                        className="dp-prev-nav dp-nav-cell dp-cell"
+                        onClick={onPrev}
+                        onKeyUp={onEnter(onPrev)}>
+                        {prevText}
+                    </div>
 
-    var props = this.props
+                    <div tabIndex="1"
+                         role="link"
+                         className="dp-nav-view dp-cell"
+                         colSpan={colspan}
+                         onClick={onChange}
+                         onKeyUp={onEnter(onChange)}>
+                        {children}
+                    </div>
 
-    return <div className="dp-header">
-      <div className="dp-nav-table">
-        <div className="dp-row">
-          <div
-            tabIndex="1"
-            role="link"
-            className="dp-prev-nav dp-nav-cell dp-cell"
-            onClick={props.onPrev}
-            onKeyUp={onEnter(props.onPrev)}
-          >{props.prevText}
-          </div>
-
-          <div
-            tabIndex="1"
-            role="link"
-            className="dp-nav-view dp-cell"
-            colSpan={props.colspan}
-            onClick={props.onChange}
-            onKeyUp={onEnter(props.onChange)}
-          >{props.children}</div>
-
-          <div
-            tabIndex="1"
-            role="link"
-            className="dp-next-nav dp-nav-cell dp-cell"
-            onClick={props.onNext}
-            onKeyUp={onEnter(props.onNext)}
-          >{props.nextText}</div>
+                    <div tabIndex="1"
+                         role="link"
+                         className="dp-next-nav dp-nav-cell dp-cell"
+                         onClick={onNext}
+                         onKeyUp={onEnter(onNext)}>
+                        {nextText}
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-      </div>
-  }
-
-})
+    }
+});

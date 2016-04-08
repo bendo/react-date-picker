@@ -1,10 +1,6 @@
-'use strict'
+import getWeekDayNames from './utils/getWeekDayNames';
 
-var getWeekDayNames = require('./utils/getWeekDayNames')
-
-// console.log(getWeekDayNames())
-
-module.exports = {
+export default {
 
     //the names of week days to be displayed in month view - first should be sunday
     weekDayNames: getWeekDayNames,
@@ -24,10 +20,10 @@ module.exports = {
     yearFormat: 'YYYY',
 
     //text for navigating to prev period
-    navPrev      : '‹',
+    navPrev: '‹',
 
     //text for navigating to next period
-    navNext      : '›',
+    navNext: '›',
 
     //the view to render initially. Possible values are: 'month', 'year', 'decade'
     view: null,
@@ -53,4 +49,4 @@ module.exports = {
     alwaysShowPrevWeek: false,
 
     grayElapsedDays: true
-}
+};

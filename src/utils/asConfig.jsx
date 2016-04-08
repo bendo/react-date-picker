@@ -1,13 +1,11 @@
-'use strict'
+import assign from 'object-assign';
+import CONFIG from '../config';
 
-var assign = require('object-assign')
+var KEYS = Object.keys(CONFIG);
 
-var CONFIG = require('../config')
-var KEYS   = Object.keys(CONFIG)
-
-function copyList(src, target, list){
-    if (src){
-        list.forEach(function(key){
+function copyList(src, target, list) {
+    if (src) {
+        list.forEach(function (key) {
             target[key] = src[key]
         })
     }
@@ -26,19 +24,19 @@ function copyList(src, target, list){
  *
  * @return {Object}
  */
-module.exports = function asConfig(source, cfg){
+export default function asConfig(source, cfg) {
 
-    var keys = KEYS
+    var keys = KEYS;
 
-    if (cfg){
+    if (cfg) {
         keys = Object.keys(cfg)
     }
 
-    cfg = cfg || CONFIG
+    cfg = cfg || CONFIG;
 
-    if (!source){
+    if (!source) {
         return assign({}, cfg)
     }
 
     return copyList(source, assign({}, cfg), keys)
-}
+};

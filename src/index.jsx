@@ -1,30 +1,28 @@
-'use strict'
+import React from 'react';
+import moment from 'moment';
+import assign from 'object-assign';
+import Header from './Header';
+import asConfig from './utils/asConfig';
+import toMoment from './toMoment';
 
-var React  = require('react')
-
-var moment   = require('moment')
-var assign   = require('object-assign')
-var asConfig = require('./utils/asConfig')
-
-var MonthView  = require('./MonthView')
-var YearView   = require('./YearView')
+var MonthView = require('./MonthView')
+var YearView = require('./YearView')
 var DecadeView = require('./DecadeView')
-var Header     = require('./Header')
-var toMoment   = require('./toMoment')
 
-var hasOwn = function(obj, key){
+var hasOwn = function (obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key)
 }
 
-var onEnter = require('./onEnter');
+import onEnter from './onEnter';
 
 var Views = {
-    month : MonthView,
-    year  : YearView,
+    month: MonthView,
+    year: YearView,
     decade: DecadeView
 }
 
-function emptyFn(){}
+function emptyFn() {
+}
 
 var DatePicker = React.createClass({
 
@@ -41,11 +39,11 @@ var DatePicker = React.createClass({
         viewDate: React.PropTypes.any
     },
 
-    getViewOrder: function() {
+    getViewOrder: function () {
         return this.props.viewOrder || ['month', 'year', 'decade']
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         var props = assign({}, asConfig(), {
             highlightWeekends: false,
             weekNumberName: '',
@@ -55,7 +53,8 @@ var DatePicker = React.createClass({
             defaultStyle: {
                 boxSizing: 'border-box'
             },
-            onRangeChange: () => {}
+            onRangeChange: () => {
+            }
         })
 
         delete props.viewDate
@@ -64,24 +63,24 @@ var DatePicker = React.createClass({
         return props
     },
 
-    getInitialState: function() {
+    getInitialState: function () {
         return {
-            view       : this.props.defaultView,
-            viewDate   : this.props.defaultViewDate,
+            view: this.props.defaultView,
+            viewDate: this.props.defaultViewDate,
             defaultDate: this.props.defaultDate,
             defaultRange: this.props.defaultRange
         }
     },
 
-    getViewName: function() {
-        var view = this.props.view != null?
-                    this.props.view:
-                    this.state.view
+    getViewName: function () {
+        var view = this.props.view != null ?
+            this.props.view :
+            this.state.view
 
         return view || 'month'
     },
 
-    addViewIndex: function(amount) {
+    addViewIndex: function (amount) {
         var viewName = this.getViewName()
 
         var order = this.getViewOrder()
@@ -92,23 +91,23 @@ var DatePicker = React.createClass({
         return index % order.length
     },
 
-    getNextViewName: function() {
+    getNextViewName: function () {
         return this.getViewOrder()[this.addViewIndex(1)]
     },
 
-    getPrevViewName: function() {
+    getPrevViewName: function () {
         return this.getViewOrder()[this.addViewIndex(-1)]
     },
 
-    getView: function() {
+    getView: function () {
         var views = this.props.views || Views
         return views[this.getViewName()] || views.month
     },
 
-    getViewFactory: function() {
+    getViewFactory: function () {
         var view = this.getView()
 
-        if (React.createFactory && view && view.prototype && typeof view.prototype.render == 'function'){
+        if (React.createFactory && view && view.prototype && typeof view.prototype.render == 'function') {
             view.__factory = view.__factory || React.createFactory(view)
             view = view.__factory
         }
@@ -116,14 +115,14 @@ var DatePicker = React.createClass({
         return view
     },
 
-    getViewDate: function() {
-        var date = hasOwn(this.props, 'viewDate')?
-                        this.props.viewDate:
-                        this.state.viewDate
+    getViewDate: function () {
+        var date = hasOwn(this.props, 'viewDate') ?
+            this.props.viewDate :
+            this.state.viewDate
 
         date = date || this.viewMoment || this.getDate() || new Date()
 
-        if (moment.isMoment(date)){
+        if (moment.isMoment(date)) {
             //in order to strip the locale - the date picker may have had its locale changed
             //between two render calls. If we don't strip this, moment(mom) returns a new moment
             //with the locale of mom, which is not what we want
@@ -135,52 +134,52 @@ var DatePicker = React.createClass({
         return date
     },
 
-    getDate: function() {
+    getDate: function () {
         var date
 
-        if (hasOwn(this.props, 'date')){
+        if (hasOwn(this.props, 'date')) {
             date = this.props.date
         } else {
             date = this.state.defaultDate
         }
-        return date? this.toMoment(date): null
+        return date ? this.toMoment(date) : null
     },
 
-    getRange: function(){
+    getRange: function () {
         var range
 
-        if (hasOwn(this.props, 'range')){
-          range = this.props.range
+        if (hasOwn(this.props, 'range')) {
+            range = this.props.range
         } else if (this.state.defaultRange) {
-          range = this.state.defaultRange
+            range = this.state.defaultRange
         }
-        if(range){
-          return range.map(r => r? this.toMoment(r): null) || null
+        if (range) {
+            return range.map(r => r ? this.toMoment(r) : null) || null
         } else {
-          return null
+            return null
         }
     },
 
-    render: function() {
+    render: function () {
 
         var props = this.p = assign({}, this.props)
 
-        this.toMoment = function(value, dateFormat){
-            return toMoment(value, dateFormat || props.dateFormat, { locale: props.locale })
+        this.toMoment = function (value, dateFormat) {
+            return toMoment(value, dateFormat || props.dateFormat, {locale: props.locale})
         }
 
-        var view  = this.getViewFactory()
+        var view = this.getViewFactory()
 
         props.date = this.getDate()
         props.range = this.getRange()
 
         var dateString = (props.date == null ? '' : props.date.format(this.props.dateFormat))
 
-        props.viewDate   = this.viewMoment = this.getViewDate()
-        props.locale     = this.props.locale
+        props.viewDate = this.viewMoment = this.getViewDate()
+        props.locale = this.props.locale
         props.localeData = moment.localeData(props.locale)
 
-        props.renderDay   = this.props.renderDay
+        props.renderDay = this.props.renderDay
         props.onRenderDay = this.props.onRenderDay
 
         // props.onChange  = this.handleChange
@@ -208,7 +207,7 @@ var DatePicker = React.createClass({
         viewProps.range = props.range
 
         return (
-            <div {...this.props} className={className} style={props.style} >
+            <div {...this.props} className={className} style={props.style}>
                 {this.renderHeader(view, props)}
 
                 <div className="dp-body" style={{flex: 1}}>
@@ -220,112 +219,112 @@ var DatePicker = React.createClass({
         )
     },
 
-    prepareStyle: function(props) {
+    prepareStyle: function (props) {
         return assign({}, props.defaultStyle, props.style)
     },
 
-    renderFooter: function(props) {
-        if (this.props.hideFooter){
+    renderFooter: function (props) {
+        if (this.props.hideFooter) {
             return
         }
 
-        if (this.props.today){
+        if (this.props.today) {
             console.warn('Please use "todayText" prop instead of "today"!')
         }
 
-        var todayText        = this.props.todayText || 'Today'
-        var closeText        = this.props.closeText || 'Close'
+        var todayText = this.props.todayText || 'Today'
+        var closeText = this.props.closeText || 'Close'
 
         var footerProps = {
-            todayText       : todayText,
-            closeText       : closeText,
-            gotoToday       : this.gotoNow,
-            close           : this.close.bind(this, props),
-            date            : props.date,
-            viewDate        : props.viewDate
+            todayText: todayText,
+            closeText: closeText,
+            gotoToday: this.gotoNow,
+            close: this.close.bind(this, props),
+            date: props.date,
+            viewDate: props.viewDate
         }
 
         var result
-        if (typeof this.props.footerFactory == 'function'){
+        if (typeof this.props.footerFactory == 'function') {
             result = this.props.footerFactory(footerProps)
         }
 
-        if (result !== undefined){
+        if (result !== undefined) {
             return result
         }
 
         return (
-          <div className="dp-footer">
-            <div
-              tabIndex="1"
-              role="link"
-              className="dp-footer-today"
-              onClick={footerProps.gotoToday}
-              onKeyUp={onEnter(footerProps.gotoToday)}
-            >
-              {todayText}
+            <div className="dp-footer">
+                <div
+                    tabIndex="1"
+                    role="link"
+                    className="dp-footer-today"
+                    onClick={footerProps.gotoToday}
+                    onKeyUp={onEnter(footerProps.gotoToday)}
+                >
+                    {todayText}
+                </div>
+                <div
+                    tabIndex="2"
+                    role="link"
+                    className="dp-footer-close"
+                    onClick={footerProps.close}
+                    onKeyUp={onEnter(footerProps.close)}
+                >
+                    {closeText}
+                </div>
             </div>
-            <div
-              tabIndex="2"
-              role="link"
-              className="dp-footer-close"
-              onClick={footerProps.close}
-              onKeyUp={onEnter(footerProps.close)}
-            >
-              {closeText}
-            </div>
-          </div>
         )
     },
 
-    gotoNow: function() {
+    gotoNow: function () {
         this.gotoDate(+new Date())
     },
 
-    close: function() {
-      window.console.log('close')
+    close: function () {
+        window.console.log('close')
     },
 
-    gotoDate: function(value) {
+    gotoDate: function (value) {
 
         this.setView('month')
 
         this.setViewDate(value)
     },
 
-    getViewColspan: function(){
+    getViewColspan: function () {
         var map = {
-            month : 5,
-            year  : 2,
+            month: 5,
+            year: 2,
             decade: 2
         }
 
         return map[this.getViewName()]
     },
 
-    renderHeader: function(view, props) {
+    renderHeader: function (view, props) {
 
-        if (this.props.hideHeader){
+        if (this.props.hideHeader) {
             return
         }
 
         props = props || this.props
 
-        var viewDate   = this.getViewDate()
+        var viewDate = this.getViewDate()
         var headerText = this.getView().getHeaderText(viewDate, props)
 
         var colspan = this.getViewColspan()
-        var prev    = this.props.navPrev
-        var next    = this.props.navNext
+        var prev = this.props.navPrev
+        var next = this.props.navNext
 
         return <Header
-                prevText={prev}
-                nextText={next}
-                colspan={colspan}
-                onPrev={this.handleNavPrev}
-                onNext={this.handleNavNext}
-                onChange={this.handleViewChange}
-            >
+            prevText={prev}
+            nextText={next}
+            colspan={colspan}
+            onPrev={this.handleNavPrev}
+            onNext={this.handleNavNext}
+            onChange={this.handleViewChange}
+        >
             {headerText}
         </Header>
     },
@@ -334,7 +333,7 @@ var DatePicker = React.createClass({
         return (this.props.renderDay || emptyFn)(date) || []
     },
 
-    handleViewChange: function() {
+    handleViewChange: function () {
         this.setView(this.getNextViewName())
     },
 
@@ -347,26 +346,26 @@ var DatePicker = React.createClass({
      * so the datepicker gets re-rendered view the new view
      *
      */
-    setView: function(view) {
+    setView: function (view) {
 
-        if (typeof this.props.onViewChange == 'function'){
+        if (typeof this.props.onViewChange == 'function') {
             this.props.onViewChange(view)
         }
 
-        if (this.props.view == null){
+        if (this.props.view == null) {
             this.setState({
                 view: view
             })
         }
     },
 
-    setViewDate: function(moment) {
+    setViewDate: function (moment) {
 
         moment = this.toMoment(moment)
 
         var fn = this.props.onViewDateChange
 
-        if (typeof fn == 'function'){
+        if (typeof fn == 'function') {
 
             var text = moment.format(this.props.dateFormat)
             var view = this.getViewName()
@@ -374,55 +373,55 @@ var DatePicker = React.createClass({
             fn(text, moment, view)
         }
 
-        if (!hasOwn(this.props, 'viewDate')){
+        if (!hasOwn(this.props, 'viewDate')) {
             this.setState({
                 viewDate: moment
             })
         }
     },
 
-    getNext: function() {
+    getNext: function () {
         var current = this.getViewDate()
         var toMoment = this.toMoment
 
         return ({
-            month: function() {
+            month: function () {
                 return toMoment(current).add(1, 'month')
             },
-            year: function() {
+            year: function () {
                 return toMoment(current).add(1, 'year')
             },
-            decade: function() {
+            decade: function () {
                 return toMoment(current).add(10, 'year')
             }
         })[this.getViewName()]()
     },
 
-    getPrev: function() {
+    getPrev: function () {
         var current = this.getViewDate()
         var toMoment = this.toMoment
 
         return ({
-            month: function() {
+            month: function () {
                 return toMoment(current).add(-1, 'month')
             },
-            year: function() {
+            year: function () {
                 return toMoment(current).add(-1, 'year')
             },
-            decade: function() {
+            decade: function () {
                 return toMoment(current).add(-10, 'year')
             }
         })[this.getViewName()]()
     },
 
-    handleNavigation: function(direction, event) {
-        var viewMoment = direction == -1?
-                            this.getPrev():
-                            this.getNext()
+    handleNavigation: function (direction, event) {
+        var viewMoment = direction == -1 ?
+            this.getPrev() :
+            this.getNext()
 
         this.setViewDate(viewMoment)
 
-        if (typeof this.props.onNav === 'function'){
+        if (typeof this.props.onNav === 'function') {
             var text = viewMoment.format(this.props.dateFormat)
             var view = this.getViewName()
 
@@ -430,18 +429,18 @@ var DatePicker = React.createClass({
         }
     },
 
-    handleNavPrev: function(event) {
+    handleNavPrev: function (event) {
         this.handleNavigation(-1, event)
     },
 
-    handleNavNext: function(event) {
+    handleNavNext: function (event) {
         this.handleNavigation(1, event)
     },
 
-    handleChange: function(date, event) {
+    handleChange: function (date, event) {
         date = this.toMoment(date)
 
-        if (this.props.navOnDateClick){
+        if (this.props.navOnDateClick) {
             var viewDate = this.toMoment(this.getViewDate())
 
             //it's not enough to compare months, since the year can change as well
@@ -450,69 +449,70 @@ var DatePicker = React.createClass({
             var viewMonth = viewDate.format('YYYY-MM')
             var dateMonth = date.format('YYYY-MM')
 
-            if (dateMonth > viewMonth){
+            if (dateMonth > viewMonth) {
                 this.handleNavNext(event)
-            } else if (dateMonth < viewMonth){
+            } else if (dateMonth < viewMonth) {
                 this.handleNavPrev(event)
             }
         }
 
         var text = date.format(this.props.dateFormat)
 
-        if (!hasOwn(this.props, 'date')){
+        if (!hasOwn(this.props, 'date')) {
             this.setState({
                 defaultDate: text
             })
         }
 
-          ;(this.props.onChange || emptyFn)(text, date, event)
+        ;
+        (this.props.onChange || emptyFn)(text, date, event)
 
-      if (this.p.range){
-        this.handleRangeChange(date, event)
-      }
+        if (this.p.range) {
+            this.handleRangeChange(date, event)
+        }
     },
 
-  handleRangeChange(mom){
-    let range = this.p.range
+    handleRangeChange(mom){
+        let range = this.p.range
 
-    if (range.length < 2){
-      range = [...range, mom]
-    } else {
-      range = [mom]
-    }
+        if (range.length < 2) {
+            range = [...range, mom]
+        } else {
+            range = [mom]
+        }
 
-    range.sort((a,b) => a - b)
+        range.sort((a, b) => a - b)
 
-    if (!this.props.range){
-      this.setState({
-        defaultRange: range
-      })
-    }
+        if (!this.props.range) {
+            this.setState({
+                defaultRange: range
+            })
+        }
 
-    const rangeText = range.map(date => {
-      return date.format(this.props.dateFormat)
-    })
+        const rangeText = range.map(date => {
+            return date.format(this.props.dateFormat)
+        })
 
-    this.props.onRangeChange(rangeText, range, event)
-  },
+        this.props.onRangeChange(rangeText, range, event)
+    },
 
-    handleSelect: function(date, event) {
+    handleSelect: function (date, event) {
         var viewName = this.getViewName()
 
         var property = ({
             decade: 'year',
-            year  : 'month'
+            year: 'month'
         })[viewName]
 
-        var value      = date.get(property)
+        var value = date.get(property)
         var viewMoment = this.toMoment(this.getViewDate()).set(property, value)
-        var view       = this.getPrevViewName()
+        var view = this.getPrevViewName()
 
         this.setViewDate(viewMoment)
 
         this.setView(view)
 
-        if (typeof this.props.onSelect === 'function'){
+        if (typeof this.props.onSelect === 'function') {
             var text = viewMoment.format(this.props.dateFormat)
             this.props.onSelect(text, viewMoment, view, event)
         }

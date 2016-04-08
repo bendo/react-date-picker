@@ -1,26 +1,22 @@
-'use strict'
+import React from 'react';
+import moment from 'moment';
+import assign from 'object-assign';
+import isInRange from './utils/isInRange';
+import onEnter from './onEnter';
+import asConfig from './utils/asConfig';
+import toMoment from './toMoment';
+import FORMAT from './utils/format';
 
-var React  = require('react')
-var moment = require('moment')
-var assign = require('object-assign')
+var TODAY;
 
-var FORMAT   = require('./utils/format')
-var asConfig = require('./utils/asConfig')
-var toMoment = require('./toMoment')
-var onEnter  = require('./onEnter')
-var assign   = require('object-assign')
-
-var isInRange = require('./utils/isInRange')
-
-var TODAY
-
-function emptyFn(){}
+function emptyFn() {
+}
 
 var DecadeView = React.createClass({
 
     displayName: 'DecadeView',
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return asConfig()
     },
 
@@ -30,7 +26,7 @@ var DecadeView = React.createClass({
      * @param  {Moment/Date/Number} value
      * @return {Moment[]}
      */
-    getYearsInDecade: function(value){
+    getYearsInDecade: function (value) {
         var year = moment(value).get('year')
         var offset = year % 10
 
@@ -41,7 +37,7 @@ var DecadeView = React.createClass({
 
         var start = moment(year, 'YYYY').startOf('year')
 
-        for (; i < 12; i++){
+        for (; i < 12; i++) {
             result.push(moment(start))
             start.add(1, 'year')
         }
@@ -49,7 +45,7 @@ var DecadeView = React.createClass({
         return result
     },
 
-    render: function() {
+    render: function () {
 
         TODAY = +moment().startOf('day')
 
@@ -57,7 +53,7 @@ var DecadeView = React.createClass({
 
         var viewMoment = props.viewMoment = moment(this.props.viewDate)
 
-        if (!this.props.range){
+        if (!this.props.range) {
             props.moment = moment(props.date).startOf('year')
         }
 
@@ -75,56 +71,56 @@ var DecadeView = React.createClass({
      * @param  {Moment[]} days
      * @return {React.DOM}
      */
-    renderYears: function(props, days) {
-        var nodes      = days.map(function(date, index, arr){
+    renderYears: function (props, days) {
+        var nodes = days.map(function (date, index, arr) {
             return this.renderYear(props, date, index, arr)
         }, this)
-        var len        = days.length
-        var buckets    = []
+        var len = days.length
+        var buckets = []
         var bucketsLen = Math.ceil(len / 4)
 
         var i = 0
 
-        for ( ; i < bucketsLen; i++){
+        for (; i < bucketsLen; i++) {
             buckets.push(nodes.slice(i * 4, (i + 1) * 4))
         }
 
-        return buckets.map(function(bucket, i){
+        return buckets.map(function (bucket, i) {
             return <div key={"row" + i} className="dp-row">{bucket}</div>
         })
     },
 
-    renderYear: function(props, date, index, arr) {
+    renderYear: function (props, date, index, arr) {
         var yearText = FORMAT.year(date, props.yearFormat)
         var classes = ["dp-cell dp-year"]
 
         var dateTimestamp = +date
 
         if (props.range) {
-          const start = date
-          const end = moment(start).endOf('year')
+            const start = date
+            const end = moment(start).endOf('year')
 
-          const [rangeStart, rangeEnd] = props.range
+            const [rangeStart, rangeEnd] = props.range
 
-          if (
-            isInRange(start, props.range) ||
-            isInRange(end, props.range) ||
-            rangeStart && isInRange(rangeStart, [start, end]) ||
-            rangeEnd && isInRange(rangeEnd, [start, end])
-          ){
-            classes.push('dp-in-range')
-          }
+            if (
+                isInRange(start, props.range) ||
+                isInRange(end, props.range) ||
+                rangeStart && isInRange(rangeStart, [start, end]) ||
+                rangeEnd && isInRange(rangeEnd, [start, end])
+            ) {
+                classes.push('dp-in-range')
+            }
         }
 
-        if (dateTimestamp == props.moment && !props.range){
+        if (dateTimestamp == props.moment && !props.range) {
             classes.push('dp-value')
         }
 
-        if (!index){
+        if (!index) {
             classes.push('dp-prev')
         }
 
-        if (index == arr.length - 1){
+        if (index == arr.length - 1) {
             classes.push('dp-next')
         }
 
@@ -144,13 +140,14 @@ var DecadeView = React.createClass({
         )
     },
 
-    handleClick: function(props, date, event) {
+    handleClick: function (props, date, event) {
         event.target.value = date
-        ;(props.onSelect || emptyFn)(date, event)
+        ;
+        (props.onSelect || emptyFn)(date, event)
     }
 })
 
-DecadeView.getHeaderText = function(value, props) {
+DecadeView.getHeaderText = function (value, props) {
     var year = moment(value).get('year')
     var offset = year % 10
 
