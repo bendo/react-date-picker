@@ -1,7 +1,7 @@
 'use strict'
 
 require('./style/base.styl')
-require('./style/theme/hackerone/index.styl')
+require('./style/theme/bootstrap/index.styl')
 
 var moment = require('moment');
 var React      = require('react')

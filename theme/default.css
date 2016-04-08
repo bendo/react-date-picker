@@ -76,6 +76,7 @@
   padding: 5px 15px;
   border-width: 1px;
   cursor: pointer;
+  color: #1b6aad;
 }
 .date-picker .dp-body {
   overflow: hidden;

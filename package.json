@@ -1,6 +1,6 @@
 {
   "name": "react-date-picker",
-  "version": "4.0.10",
+  "version": "4.0.20",
   "description": "A carefully crafted date picker for React",
   "main": "lib/index.js",
   "scripts": {
@@ -9,9 +9,9 @@
     "build-css": "npm run build-css-index && npm run build-css-base && npm run build-themes",
     "build-css-index": "webpack --progress --config build/build-css-index.config.js",
     "build-css-base": "webpack --progress --config build/build-css-base.config.js",
-    "build-themes": "npm run build-theme-default && npm run build-theme-hackerone",
+    "build-themes": "npm run build-theme-default && npm run build-theme-bootstrap",
     "build-theme-default": "webpack --progress --config build/build-theme-default.config.js",
-    "build-theme-hackerone": "webpack --progress --config build/build-theme-hackerone.config.js",
+    "build-theme-bootstrap": "webpack --progress --config build/build-theme-bootstrap.config.js",
     "dist": "webpack --progress --config build/dist.config.js",
     "dist.min": "webpack --progress -p --config build/dist.min.config.js",
     "dist-nomoment": "webpack --progress --config build/dist.nomoment.config.js",
@@ -21,6 +21,9 @@
     "build": "npm run build-css && npm run dist && npm run dist-nomoment && npm run dist.min && npm run dist-nomoment.min && npm run lib",
 
     "prepublish": "npm run build"
+  },
+  "publishConfig": {
+    "registry": "http://npm.muc.local"
   },
   "contributors": [],
   "author": "ZippyUI <contact@zippyui.com>",
