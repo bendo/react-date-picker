@@ -5,26 +5,26 @@ import Header from './Header';
 import asConfig from './utils/asConfig';
 import toMoment from './toMoment';
 
-var MonthView = require('./MonthView')
-var YearView = require('./YearView')
-var DecadeView = require('./DecadeView')
+import MonthView from './MonthView';
+import YearView from './YearView';
+import DecadeView from './DecadeView';
 
 var hasOwn = function (obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key)
-}
+};
 
 import onEnter from './onEnter';
 
-var Views = {
+const Views = {
     month: MonthView,
     year: YearView,
     decade: DecadeView
-}
+};
 
 function emptyFn() {
 }
 
-var DatePicker = React.createClass({
+const DatePicker = React.createClass({
 
     displayName: 'DatePicker',
 
@@ -645,4 +645,4 @@ DatePicker.propTypes = {
     highlightRangeOnMouseMove: PT.bool
 }
 
-module.exports = DatePicker
+export default DatePicker

@@ -27,18 +27,18 @@ var DecadeView = React.createClass({
      * @return {Moment[]}
      */
     getYearsInDecade: function (value) {
-        var year = moment(value).get('year')
-        var offset = year % 10
+        var year = moment(value).get('year');
+        var offset = year % 10;
 
-        year = year - offset - 1
+        year = year - offset - 1;
 
-        var result = []
-        var i = 0
+        var result = [];
+        var i = 0;
 
-        var start = moment(year, 'YYYY').startOf('year')
+        var start = moment(year, 'YYYY').startOf('year');
 
         for (; i < 12; i++) {
-            result.push(moment(start))
+            result.push(moment(start));
             start.add(1, 'year')
         }
 
@@ -47,17 +47,17 @@ var DecadeView = React.createClass({
 
     render: function () {
 
-        TODAY = +moment().startOf('day')
+        TODAY = +moment().startOf('day');
 
-        var props = assign({}, this.props)
+        var props = assign({}, this.props);
 
-        var viewMoment = props.viewMoment = moment(this.props.viewDate)
+        var viewMoment = props.viewMoment = moment(this.props.viewDate);
 
         if (!this.props.range) {
             props.moment = moment(props.date).startOf('year')
         }
 
-        var yearsInView = this.getYearsInDecade(viewMoment)
+        var yearsInView = this.getYearsInDecade(viewMoment);
 
         return (
             <div className="dp-table dp-decade-view">
@@ -74,12 +74,12 @@ var DecadeView = React.createClass({
     renderYears: function (props, days) {
         var nodes = days.map(function (date, index, arr) {
             return this.renderYear(props, date, index, arr)
-        }, this)
-        var len = days.length
-        var buckets = []
-        var bucketsLen = Math.ceil(len / 4)
+        }, this);
+        var len = days.length;
+        var buckets = [];
+        var bucketsLen = Math.ceil(len / 4);
 
-        var i = 0
+        var i = 0;
 
         for (; i < bucketsLen; i++) {
             buckets.push(nodes.slice(i * 4, (i + 1) * 4))
@@ -91,16 +91,16 @@ var DecadeView = React.createClass({
     },
 
     renderYear: function (props, date, index, arr) {
-        var yearText = FORMAT.year(date, props.yearFormat)
-        var classes = ["dp-cell dp-year"]
+        var yearText = FORMAT.year(date, props.yearFormat);
+        var classes = ["dp-cell dp-year"];
 
-        var dateTimestamp = +date
+        var dateTimestamp = +date;
 
         if (props.range) {
-            const start = date
-            const end = moment(start).endOf('year')
+            const start = date;
+            const end = moment(start).endOf('year');
 
-            const [rangeStart, rangeEnd] = props.range
+            const [rangeStart, rangeEnd] = props.range;
 
             if (
                 isInRange(start, props.range) ||
@@ -124,7 +124,7 @@ var DecadeView = React.createClass({
             classes.push('dp-next')
         }
 
-        var onClick = this.handleClick.bind(this, props, date)
+        var onClick = this.handleClick.bind(this, props, date);
 
         return (
             <div
@@ -145,15 +145,15 @@ var DecadeView = React.createClass({
         ;
         (props.onSelect || emptyFn)(date, event)
     }
-})
+});
 
 DecadeView.getHeaderText = function (value, props) {
-    var year = moment(value).get('year')
-    var offset = year % 10
+    var year = moment(value).get('year');
+    var offset = year % 10;
 
-    year = year - offset - 1
+    year = year - offset - 1;
 
     return year + ' - ' + (year + 11)
-}
+};
 
-module.exports = DecadeView
+export default DecadeView

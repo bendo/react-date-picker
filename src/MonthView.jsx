@@ -12,7 +12,7 @@ var TODAY;
 function emptyFn() {
 }
 
-var MonthView = React.createClass({
+const MonthView = React.createClass({
 
     displayName: 'MonthView',
 
@@ -379,4 +379,4 @@ MonthView.getHeaderText = function (moment, props) {
     return toMoment(moment, null, {locale: props.locale}).format('MMMM YYYY')
 };
 
-module.exports = MonthView;
+export default MonthView

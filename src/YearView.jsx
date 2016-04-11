@@ -12,7 +12,7 @@ var TODAY;
 function emptyFn() {
 }
 
-var YearView = React.createClass({
+const YearView = React.createClass({
 
     displayName: 'YearView',
 
@@ -133,4 +133,4 @@ YearView.getHeaderText = function (moment, props) {
     return toMoment(moment, null, {locale: props.locale}).format('YYYY')
 };
 
-module.exports = YearView;
+export default YearView
