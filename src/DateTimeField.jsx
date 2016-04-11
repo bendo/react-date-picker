@@ -56,7 +56,7 @@ const DateTimeField = React.createClass({
                 classes.bottom = false;
                 classes["pull-right"] = true;
             } else {
-                offset.top = 75;
+                offset.top = 62;
                 classes.top = false;
                 classes.bottom = true;
                 classes["pull-right"] = true;
@@ -64,9 +64,10 @@ const DateTimeField = React.createClass({
             styles = {
                 display: "block",
                 position: "absolute",
+                zIndex: 999,
                 top: offset.top,
                 left: "auto",
-                right: 10
+                right: 40
             };
             return this.setState({
                 widgetStyle: styles,
@@ -107,7 +108,8 @@ const DateTimeField = React.createClass({
                 <DatePicker style={{width: 300, height: 250}}
                             highlightWeekends={true}
                             locale={this.props.locale}
-                            weekNumbers/>
+                            weekNumbers
+                            closePicker={this.closePicker}/>
             </li>
         );
 

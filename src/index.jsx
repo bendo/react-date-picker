@@ -282,12 +282,12 @@ const DatePicker = React.createClass({
     },
 
     close: function () {
-        window.console.log('close')
+        return this.props.closePicker();
     },
 
     gotoDate: function (value) {
 
-        this.setView('month')
+        this.setView('month');
 
         this.setViewDate(value)
     },
@@ -297,7 +297,7 @@ const DatePicker = React.createClass({
             month: 5,
             year: 2,
             decade: 2
-        }
+        };
 
         return map[this.getViewName()]
     },
@@ -308,14 +308,14 @@ const DatePicker = React.createClass({
             return
         }
 
-        props = props || this.props
+        props = props || this.props;
 
-        var viewDate = this.getViewDate()
-        var headerText = this.getView().getHeaderText(viewDate, props)
+        var viewDate = this.getViewDate();
+        var headerText = this.getView().getHeaderText(viewDate, props);
 
-        var colspan = this.getViewColspan()
-        var prev = this.props.navPrev
-        var next = this.props.navNext
+        var colspan = this.getViewColspan();
+        var prev = this.props.navPrev;
+        var next = this.props.navNext;
 
         return <Header
             prevText={prev}
