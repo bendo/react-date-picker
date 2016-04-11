@@ -1,78 +1,79 @@
 {
-  "name": "react-date-picker",
-  "version": "4.8.0",
-  "description": "A carefully crafted date picker for React",
-  "main": "lib/index.js",
-  "scripts": {
-    "test": "mocha --recursive --reporter spec --require should",
-    "dev": "webpack-dev-server --progress --config build/webpack.config.js",
-    "build-css": "npm run build-css-index && npm run build-css-base && npm run build-themes",
-    "build-css-index": "webpack --progress --config build/build-css-index.config.js",
-    "build-css-base": "webpack --progress --config build/build-css-base.config.js",
-    "build-themes": "npm run build-theme-default && npm run build-theme-bootstrap",
-    "build-theme-default": "webpack --progress --config build/build-theme-default.config.js",
-    "build-theme-bootstrap": "webpack --progress --config build/build-theme-bootstrap.config.js",
-    "dist": "webpack --progress --config build/dist.config.js",
-    "dist.min": "webpack --progress -p --config build/dist.min.config.js",
-    "dist-nomoment": "webpack --progress --config build/dist.nomoment.config.js",
-    "dist-nomoment.min": "webpack --progress -p --config build/dist.nomoment.min.config.js",
-    "lib": "babel --out-dir lib src",
-    "test-w": "mocha --recursive --reporter spec --require should --watch",
-    "build": "npm run build-css && npm run dist && npm run dist-nomoment && npm run dist.min && npm run dist-nomoment.min && npm run lib",
-
-    "prepublish": "npm run build"
-  },
-  "publishConfig": {
-    "registry": "http://npm.muc.local"
-  },
-  "contributors": [],
-  "author": "ZippyUI <contact@zippyui.com>",
-  "license": "MIT",
-  "dependencies": {
-    "moment": ">=2.8.0",
-    "object-assign": "^4.0.1"
-  },
-  "peerDependencies": {
-    "react": ">=0.14.0 || ^15.0.0-rc1"
-  },
-  "devDependencies": {
-    "react": ">=0.14.0 || ^15.0.0-rc1",
-    "react-dom": ">=0.14.0 || ^15.0.0-rc1",
-    "autoprefixer-loader": "^3.1.0",
-    "babel-cli": "^6.5.0",
-    "babel-core": "^6.5.0",
-    "babel-loader": "^6.2.0",
-    "babel-preset-es2015": "^6.5.0",
-    "babel-preset-react": "^6.5.0",
-    "css-loader": "^0.15.5",
-    "extract-text-webpack-plugin": "^0.8.2",
-    "file-loader": "^0.8.4",
-    "jsdom": "^5.6.1",
-    "json-loader": "^0.5.2",
-    "mocha": "^2.2.4",
-    "node-libs-browser": "^0.5.2",
-    "react-hot-loader": "^1.2.8",
-    "should": "^6.0.3",
-    "style-loader": "^0.12.3",
-    "stylus-loader": "~0.4.0",
-    "url-loader": "^0.5.6",
-    "webpack": "^1.10.1",
-    "webpack-dev-server": "^1.12.1"
-  },
-  "keywords": [
-    "date",
-    "picker",
-    "date-picker",
-    "react",
-    "react-date-picker",
-    "react-component"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zippyui/react-date-picker.git"
-  },
-  "bugs": {
-    "url": "https://github.com/zippyui/react-date-picker/issues"
-  },
-  "homepage": "https://github.com/zippyui/react-date-picker"
+    "name": "react-date-picker",
+    "version": "4.8.0",
+    "description": "A carefully crafted date picker for React",
+    "main": "lib/index.js",
+    "scripts": {
+        "test": "mocha --recursive --reporter spec --require should",
+        "dev": "webpack-dev-server --progress --config build/webpack.config.js",
+        "build-css": "npm run build-css-index && npm run build-css-base && npm run build-themes",
+        "build-css-index": "webpack --progress --config build/build-css-index.config.js",
+        "build-css-base": "webpack --progress --config build/build-css-base.config.js",
+        "build-themes": "npm run build-theme-default && npm run build-theme-bootstrap",
+        "build-theme-default": "webpack --progress --config build/build-theme-default.config.js",
+        "build-theme-bootstrap": "webpack --progress --config build/build-theme-bootstrap.config.js",
+        "dist": "webpack --progress --config build/dist.config.js",
+        "dist.min": "webpack --progress -p --config build/dist.min.config.js",
+        "dist-nomoment": "webpack --progress --config build/dist.nomoment.config.js",
+        "dist-nomoment.min": "webpack --progress -p --config build/dist.nomoment.min.config.js",
+        "lib": "babel --out-dir lib src",
+        "test-w": "mocha --recursive --reporter spec --require should --watch",
+        "build": "npm run build-css && npm run dist && npm run dist-nomoment && npm run dist.min && npm run dist-nomoment.min && npm run lib",
+        "prepublish": "npm run build"
+    },
+    "publishConfig": {
+        "registry": "http://npm.muc.local"
+    },
+    "contributors": [],
+    "author": "ZippyUI <contact@zippyui.com>",
+    "license": "MIT",
+    "dependencies": {
+        "classnames": "2.2.3",
+        "moment": ">=2.8.0",
+        "object-assign": "^4.0.1"
+    },
+    "peerDependencies": {
+        "react": ">=0.14.0 || ^15.0.0-rc1"
+    },
+    "devDependencies": {
+        "react": ">=0.14.0 || ^15.0.0-rc1",
+        "react-dom": ">=0.14.0 || ^15.0.0-rc1",
+        "autoprefixer-loader": "^3.1.0",
+        "babel-cli": "^6.5.0",
+        "babel-core": "^6.5.0",
+        "babel-loader": "^6.2.0",
+        "babel-preset-es2015": "^6.5.0",
+        "babel-preset-stage-0": "6.5.0",
+        "babel-preset-react": "^6.5.0",
+        "css-loader": "^0.15.5",
+        "extract-text-webpack-plugin": "^0.8.2",
+        "file-loader": "^0.8.4",
+        "jsdom": "^5.6.1",
+        "json-loader": "^0.5.2",
+        "mocha": "^2.2.4",
+        "node-libs-browser": "^0.5.2",
+        "react-hot-loader": "^1.2.8",
+        "should": "^6.0.3",
+        "style-loader": "^0.12.3",
+        "stylus-loader": "~0.4.0",
+        "url-loader": "^0.5.6",
+        "webpack": "^1.10.1",
+        "webpack-dev-server": "^1.12.1"
+    },
+    "keywords": [
+        "date",
+        "picker",
+        "date-picker",
+        "react",
+        "react-date-picker",
+        "react-component"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zippyui/react-date-picker.git"
+    },
+    "bugs": {
+        "url": "https://github.com/zippyui/react-date-picker/issues"
+    },
+    "homepage": "https://github.com/zippyui/react-date-picker"
 }

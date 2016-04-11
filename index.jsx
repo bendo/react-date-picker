@@ -5,6 +5,7 @@ import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DatePicker from './src/index';
+import DateTimeField from './src/DateTimeField';
 
 let range = ['2016-02-01', '2016-02-09'];
 let date = moment().add(2, 'days');
@@ -44,17 +45,16 @@ const App = React.createClass({
                     </select>
                 </p>
 
-                <DatePicker style={{width: 300, height: 250}}
-                            xweekStartDay={3}
-                            highlightWeekends={true}
-                            locale="en"
-                            weekNumbers
-                    //defaultRange={range}
-                            defaultDate={date}
-                    //onChange={this.onRangeChange}
-                    //onRangeChange={this.onRangeChange}
-                            xweekDayNames={['S','M','T','W','T','F','S']}
-                />
+                <DateTimeField highlightWeekends={true}
+                               locale={LOCALE}
+                               weekNumbers/>
+
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+                into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+                software like Aldus PageMaker including versions of Lorem Ipsum.</p>
             </div>
         )
     },
@@ -65,5 +65,17 @@ const App = React.createClass({
         //this.setState({})
     }
 });
+
+/*<DatePicker style={{width: 300, height: 250}}
+ xweekStartDay={3}
+ highlightWeekends={true}
+ locale={LOCALE}
+ weekNumbers
+ //defaultRange={range}
+ defaultDate={date}
+ //onChange={this.onRangeChange}
+ //onRangeChange={this.onRangeChange}
+ xweekDayNames={['S','M','T','W','T','F','S']}
+ />*/
 
 ReactDOM.render(<App />, document.getElementById('content'));
