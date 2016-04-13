@@ -9,7 +9,7 @@ const DateTimeField = React.createClass({
     getInitialState() {
         return {
             showPicker: false,
-            inputValue: undefined,
+            inputValue: moment(this.props.defaultDate, "x").format(this.props.dateFormat),
             widgetStyle: {
                 display: 'block',
                 position: 'absolute',
@@ -76,6 +76,16 @@ const DateTimeField = React.createClass({
         }
     },
 
+    onDateChange(dateText, moment, event) {
+        this.setState({inputValue: dateText});
+        this.closePicker();
+    },
+
+    onChange(e) {
+        this.setState({inputValue: e.target.value});
+        this.props.defaultDate = e.target.value;
+    },
+
     closePicker() {
         let style = {...this.state.widgetStyle};
         style.left = -9999;
@@ -105,11 +115,18 @@ const DateTimeField = React.createClass({
     render() {
         const datePicker = (
             <li>
-                <DatePicker style={{width: 300, height: 250}}
-                            highlightWeekends={true}
+                <DatePicker closePicker={this.closePicker}
+                    //date
+                            defaultDate={this.props.defaultDate}
+                            dateFormat={this.props.dateFormat}
+                            grayElapsedDays={this.props.grayElapsedDays}
+                            highlightWeekends={this.props.highlightWeekends}
                             locale={this.props.locale}
-                            weekNumbers
-                            closePicker={this.closePicker}/>
+                            minDate={this.props.minDate}
+                            maxDate={this.props.maxDate}
+                            onChange={this.onDateChange}
+                            style={{width: 300, height: 250}}
+                            weekNumbers/>
             </li>
         );
 
@@ -125,9 +142,9 @@ const DateTimeField = React.createClass({
                 <div className={'input-group date ' + this.size()} ref='datetimepicker'>
                     <input className='form-control' onChange={this.onChange} type='text'
                            value={this.state.inputValue} {...this.props.inputProps}/>
-              <span className='input-group-addon' onBlur={this.onBlur} onClick={this.onClick} ref='dtpbutton'>
-                <span className={classNames('glyphicon', 'glyphicon-calendar')}/>
-              </span>
+                    <span className='input-group-addon' onBlur={this.onBlur} onClick={this.onClick} ref='dtpbutton'>
+                        <span className={classNames('glyphicon', 'glyphicon-calendar')}/>
+                    </span>
                 </div>
             </div>
         );

@@ -278,7 +278,8 @@ const DatePicker = React.createClass({
     },
 
     gotoNow: function () {
-        this.gotoDate(+new Date())
+        this.handleChange(+new Date());
+        this.props.closePicker();
     },
 
     close: function () {
@@ -463,8 +464,6 @@ const DatePicker = React.createClass({
                 defaultDate: text
             })
         }
-
-        ;
         (this.props.onChange || emptyFn)(text, date, event)
 
         if (this.p.range) {

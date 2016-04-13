@@ -20,7 +20,7 @@ module.exports = {
   devServer: {
     publicPath: '/assets',
     filename: 'bundle.js',
-    port: 8080,
+    port: 8888,
     host: '0.0.0.0'
   }
 };

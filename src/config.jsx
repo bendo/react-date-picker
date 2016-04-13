@@ -48,5 +48,5 @@ export default {
 
     alwaysShowPrevWeek: false,
 
-    grayElapsedDays: true
+    grayElapsedDays: false
 };
