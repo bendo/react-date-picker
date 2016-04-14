@@ -9,7 +9,7 @@ const DateTimeField = React.createClass({
     getInitialState() {
         return {
             showPicker: false,
-            inputValue: moment(this.props.defaultDate, "x").format(this.props.dateFormat),
+            inputValue: moment(this.props.defaultDate).locale(this.props.locale || 'en').format('L'),
             widgetStyle: {
                 display: 'block',
                 position: 'absolute',

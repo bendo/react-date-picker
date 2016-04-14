@@ -8,9 +8,10 @@ import DatePicker from './src/index';
 import DateTimeField from './src/DateTimeField';
 
 let range = ['2016-02-01', '2016-02-09'];
-let date = moment().add(50, 'days');
-let minDate = moment().subtract(30, 'days');
-let maxDate = moment().add(30, 'days');
+let date = moment().toISOString();
+//let date = '06/07/2016';
+let minDate = moment().subtract(90, 'days');
+let maxDate = moment().add(90, 'days');
 
 let LOCALE = 'en';
 
@@ -26,7 +27,7 @@ const App = React.createClass({
     displayName: 'App',
 
     handleChange: function (newDate) {
-        window.console.log("newDate", newDate);
+        window.console.log("newDate", moment(newDate).toISOString());
         return this.setState({date: newDate});
     },
 
@@ -53,7 +54,7 @@ const App = React.createClass({
                 </p>
 
                 <DateTimeField defaultDate={date}
-                               dateFormat="DD MMMM YYYY" // check
+                               //dateFormat="DD MMMM YYYY" // check
                                highlightWeekends={true}
                                locale={LOCALE}
                                minDate={minDate}

@@ -55,10 +55,10 @@ const DatePicker = React.createClass({
             },
             onRangeChange: () => {
             }
-        })
+        });
 
-        delete props.viewDate
-        delete props.date
+        delete props.viewDate;
+        delete props.date;
 
         return props
     },
@@ -75,18 +75,18 @@ const DatePicker = React.createClass({
     getViewName: function () {
         var view = this.props.view != null ?
             this.props.view :
-            this.state.view
+            this.state.view;
 
         return view || 'month'
     },
 
     addViewIndex: function (amount) {
-        var viewName = this.getViewName()
+        var viewName = this.getViewName();
 
-        var order = this.getViewOrder()
-        var index = order.indexOf(viewName)
+        var order = this.getViewOrder();
+        var index = order.indexOf(viewName);
 
-        index += amount
+        index += amount;
 
         return index % order.length
     },
@@ -100,15 +100,15 @@ const DatePicker = React.createClass({
     },
 
     getView: function () {
-        var views = this.props.views || Views
+        var views = this.props.views || Views;
         return views[this.getViewName()] || views.month
     },
 
     getViewFactory: function () {
-        var view = this.getView()
+        var view = this.getView();
 
         if (React.createFactory && view && view.prototype && typeof view.prototype.render == 'function') {
-            view.__factory = view.__factory || React.createFactory(view)
+            view.__factory = view.__factory || React.createFactory(view);
             view = view.__factory
         }
 
@@ -116,11 +116,9 @@ const DatePicker = React.createClass({
     },
 
     getViewDate: function () {
-        var date = hasOwn(this.props, 'viewDate') ?
-            this.props.viewDate :
-            this.state.viewDate
+        var date = hasOwn(this.props, 'viewDate') ? this.props.viewDate : this.state.viewDate;
 
-        date = date || this.viewMoment || this.getDate() || new Date()
+        date = date || this.viewMoment || this.getDate() || new Date();
 
         if (moment.isMoment(date)) {
             //in order to strip the locale - the date picker may have had its locale changed
@@ -439,16 +437,14 @@ const DatePicker = React.createClass({
     },
 
     handleChange: function (date, event) {
-        date = this.toMoment(date)
-
+        date = this.toMoment(date);
         if (this.props.navOnDateClick) {
-            var viewDate = this.toMoment(this.getViewDate())
-
+            var viewDate = this.toMoment(this.getViewDate());
             //it's not enough to compare months, since the year can change as well
             //
             //also it's ok to hardcode the format here
-            var viewMonth = viewDate.format('YYYY-MM')
-            var dateMonth = date.format('YYYY-MM')
+            var viewMonth = viewDate.format('YYYY-MM');
+            var dateMonth = date.format('YYYY-MM');
 
             if (dateMonth > viewMonth) {
                 this.handleNavNext(event)
@@ -457,14 +453,14 @@ const DatePicker = React.createClass({
             }
         }
 
-        var text = date.format(this.props.dateFormat)
+        var text = date.locale(this.props.locale || 'en').format('L');
 
         if (!hasOwn(this.props, 'date')) {
             this.setState({
                 defaultDate: text
             })
         }
-        (this.props.onChange || emptyFn)(text, date, event)
+        (this.props.onChange || emptyFn)(text, date, event);
 
         if (this.p.range) {
             this.handleRangeChange(date, event)
