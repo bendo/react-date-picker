@@ -453,7 +453,7 @@ const DatePicker = React.createClass({
             }
         }
 
-        var text = date.locale(this.props.locale || 'en').format('L');
+        var text = date.format(this.props.dateFormat);
 
         if (!hasOwn(this.props, 'date')) {
             this.setState({

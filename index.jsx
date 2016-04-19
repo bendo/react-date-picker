@@ -9,19 +9,11 @@ import DateTimeField from './src/DateTimeField';
 
 let range = ['2016-02-01', '2016-02-09'];
 let date = moment().toISOString();
-//let date = '06/07/2016';
+let date2 = '';
 let minDate = moment().subtract(90, 'days');
 let maxDate = moment().add(90, 'days');
 
 let LOCALE = 'en';
-
-const TODAY = {
-    en: 'Today',
-    fr: 'Aujourd\'hui',
-    de: 'Heute',
-    es: 'Hoy',
-    ro: 'Azi'
-};
 
 const App = React.createClass({
     displayName: 'App',
@@ -54,7 +46,6 @@ const App = React.createClass({
                 </p>
 
                 <DateTimeField defaultDate={date}
-                               //dateFormat="DD MMMM YYYY" // check
                                highlightWeekends={true}
                                locale={LOCALE}
                                minDate={minDate}
@@ -70,8 +61,7 @@ const App = React.createClass({
                     with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
                     publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 
-                <DateTimeField defaultDate={date}
-                               dateFormat="DD MM YYYY" // check
+                <DateTimeField defaultDate={date2}
                                highlightWeekends={true}
                                locale={LOCALE}
                                onChange={this.handleChange}
@@ -88,17 +78,5 @@ const App = React.createClass({
         //this.setState({})
     }
 });
-
-/*<DatePicker style={{width: 300, height: 250}}
- xweekStartDay={3}
- highlightWeekends={true}
- locale={LOCALE}
- weekNumbers
- //defaultRange={range}
- defaultDate={date}
- //onChange={this.onRangeChange}
- //onRangeChange={this.onRangeChange}
- xweekDayNames={['S','M','T','W','T','F','S']}
- />*/
 
 ReactDOM.render(<App />, document.getElementById('content'));
