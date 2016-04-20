@@ -9,7 +9,7 @@ const DateTimeField = React.createClass({
     getInitialState() {
         return {
             showPicker: false,
-            inputValue: this.props.defaultDate == '' ? '' : moment(this.props.defaultDate).locale(this.props.locale || 'en').format('L'),
+            inputValue: this.props.date == '' ? '' : this.getLocaleDate().format('L'),
             widgetStyle: {
                 display: 'block',
                 position: 'absolute',
@@ -83,8 +83,7 @@ const DateTimeField = React.createClass({
     },
 
     onChange(e) {
-        //this.setState({inputValue: e.target.value});
-        //this.props.defaultDate = e.target.value;
+        return this.setState({defaultDate: e.target.value, inputValue: e.target.value});
     },
 
     closePicker() {
@@ -113,11 +112,20 @@ const DateTimeField = React.createClass({
         }
     },
 
+    getLocaleDate() {
+        return moment(this.props.date).locale(this.props.locale || 'en');
+    },
+
+    getDate() {
+        return this.state.inputValue == '' ? moment().locale(this.props.locale || 'en') :
+            moment(this.state.inputValue, this.getLocaleDate().localeData().longDateFormat('L')).format();
+    },
+
     render() {
         const datePicker = (
             <li>
                 <DatePicker closePicker={this.closePicker}
-                            defaultDate={this.props.defaultDate}
+                            defaultDate={this.getDate()}
                             dateFormat={this.props.dateFormat}
                             grayElapsedDays={this.props.grayElapsedDays}
                             highlightWeekends={this.props.highlightWeekends}
@@ -151,7 +159,7 @@ const DateTimeField = React.createClass({
     },
 
     propTypes: {
-        defaultDate: React.PropTypes.string.isRequired,
+        date: React.PropTypes.string.isRequired,
         locale: React.PropTypes.string,
         highlightWeekends: React.PropTypes.bool,
         minDate: React.PropTypes.object,

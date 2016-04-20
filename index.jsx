@@ -8,7 +8,7 @@ import DatePicker from './src/index';
 import DateTimeField from './src/DateTimeField';
 
 let range = ['2016-02-01', '2016-02-09'];
-let date = moment().toISOString();
+let date = moment().add(2, 'days').toISOString();
 let date2 = '';
 let minDate = moment().subtract(90, 'days');
 let maxDate = moment().add(90, 'days');
@@ -45,7 +45,7 @@ const App = React.createClass({
                     </select>
                 </p>
 
-                <DateTimeField defaultDate={date}
+                <DateTimeField date={date}
                                highlightWeekends={true}
                                locale={LOCALE}
                                minDate={minDate}
@@ -61,7 +61,7 @@ const App = React.createClass({
                     with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
                     publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 
-                <DateTimeField defaultDate={date2}
+                <DateTimeField date={date2}
                                highlightWeekends={true}
                                locale={LOCALE}
                                onChange={this.handleChange}

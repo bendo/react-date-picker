@@ -39,6 +39,12 @@ const DatePicker = React.createClass({
         viewDate: React.PropTypes.any
     },
 
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({
+            defaultDate: this.props.defaultDate,
+        });
+    },
+
     getViewOrder: function () {
         return this.props.viewOrder || ['month', 'year', 'decade']
     },
