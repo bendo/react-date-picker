@@ -39,9 +39,14 @@ const DatePicker = React.createClass({
         viewDate: React.PropTypes.any
     },
 
-    componentWillReceiveProps: function(nextProps) {
+    componentWillReceiveProps: function (nextProps) {
+        if (moment(this.props.defaultDate).isValid()) {
+            this.setState({
+                viewDate: this.props.defaultDate
+            });
+        }
         this.setState({
-            defaultDate: this.props.defaultDate,
+            defaultDate: this.props.defaultDate
         });
     },
 
@@ -133,13 +138,13 @@ const DatePicker = React.createClass({
             date = +date
         }
 
-        date = this.toMoment(date)
+        date = this.toMoment(date);
 
         return date
     },
 
     getDate: function () {
-        var date
+        var date;
 
         if (hasOwn(this.props, 'date')) {
             date = this.props.date
@@ -150,7 +155,7 @@ const DatePicker = React.createClass({
     },
 
     getRange: function () {
-        var range
+        var range;
 
         if (hasOwn(this.props, 'range')) {
             range = this.props.range
@@ -166,49 +171,49 @@ const DatePicker = React.createClass({
 
     render: function () {
 
-        var props = this.p = assign({}, this.props)
+        var props = this.p = assign({}, this.props);
 
         this.toMoment = function (value, dateFormat) {
             return toMoment(value, dateFormat || props.dateFormat, {locale: props.locale})
-        }
+        };
 
-        var view = this.getViewFactory()
+        var view = this.getViewFactory();
 
-        props.date = this.getDate()
-        props.range = this.getRange()
+        props.date = this.getDate();
+        props.range = this.getRange();
 
-        var dateString = (props.date == null ? '' : props.date.format(this.props.dateFormat))
+        var dateString = (props.date == null ? '' : props.date.format(this.props.dateFormat));
 
-        props.viewDate = this.viewMoment = this.getViewDate()
-        props.locale = this.props.locale
-        props.localeData = moment.localeData(props.locale)
+        props.viewDate = this.viewMoment = this.getViewDate();
+        props.locale = this.props.locale;
+        props.localeData = moment.localeData(props.locale);
 
-        props.renderDay = this.props.renderDay
-        props.onRenderDay = this.props.onRenderDay
+        props.renderDay = this.props.renderDay;
+        props.onRenderDay = this.props.onRenderDay;
 
         // props.onChange  = this.handleChange
         // props.onSelect  = this.handleSelect
 
-        var className = (this.props.className || '') + ' date-picker'
+        var className = (this.props.className || '') + ' date-picker';
 
-        props.style = this.prepareStyle(props)
+        props.style = this.prepareStyle(props);
 
-        var viewProps = props
-        var viewProps = asConfig(props)
+        var viewProps = props;
+        var viewProps = asConfig(props);
 
-        viewProps.toMoment = this.toMoment
-        viewProps.highlightWeekends = this.props.highlightWeekends
-        viewProps.weekNumbers = this.props.weekNumbers
-        viewProps.weekNumberName = this.props.weekNumberName
-        viewProps.dateString = dateString
-        viewProps.localeData = props.localeData
-        viewProps.onSelect = this.handleSelect
-        viewProps.onChange = this.handleChange
-        viewProps.onWeekChange = this.props.onWeekChange
-        viewProps.renderWeekNumber = this.props.renderWeekNumber
+        viewProps.toMoment = this.toMoment;
+        viewProps.highlightWeekends = this.props.highlightWeekends;
+        viewProps.weekNumbers = this.props.weekNumbers;
+        viewProps.weekNumberName = this.props.weekNumberName;
+        viewProps.dateString = dateString;
+        viewProps.localeData = props.localeData;
+        viewProps.onSelect = this.handleSelect;
+        viewProps.onChange = this.handleChange;
+        viewProps.onWeekChange = this.props.onWeekChange;
+        viewProps.renderWeekNumber = this.props.renderWeekNumber;
 
-        viewProps.highlightRangeOnMouseMove = this.props.highlightRangeOnMouseMove
-        viewProps.range = props.range
+        viewProps.highlightRangeOnMouseMove = this.props.highlightRangeOnMouseMove;
+        viewProps.range = props.range;
 
         return (
             <div {...this.props} className={className} style={props.style}>
