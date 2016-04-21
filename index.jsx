@@ -10,8 +10,8 @@ import DateTimeField from './src/DateTimeField';
 let range = ['2016-02-01', '2016-02-09'];
 let date = moment().add(2, 'days').toISOString();
 let date2 = '';
-let minDate = moment().subtract(90, 'days');
-let maxDate = moment().add(90, 'days');
+let minDate = moment().subtract(10, 'days').toISOString();
+let maxDate = moment().add(10, 'days').toISOString();
 
 let LOCALE = 'en';
 

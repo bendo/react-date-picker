@@ -76,18 +76,22 @@ const DateTimeField = React.createClass({
         }
     },
 
+    toISO(date) {
+        return date.substring(0, date.length - 6) + '.000Z';
+    },
+
     onDateChange(dateText) {
         const formattedDate = moment(dateText).locale(this.props.locale || 'en').format('L');
         this.setState({inputValue: formattedDate});
         this.closePicker();
-        this.props.onChange(moment(dateText).format(), moment(dateText));
+        this.props.onChange(this.toISO(moment(dateText).format()), moment(dateText));
     },
 
     onInputChange(e) {
         const date = e.target.value;
         if (moment(date, this.getLocaleDate().localeData().longDateFormat('L'), true).isValid()) {
             const m = moment(date, this.getLocaleDate().localeData().longDateFormat('L'));
-            const d = m.format();
+            const d = this.toISO(m.format());
             this.props.onChange(d, m);
         } else {
             this.props.onChange('', undefined);
@@ -139,8 +143,8 @@ const DateTimeField = React.createClass({
                             grayElapsedDays={this.props.grayElapsedDays}
                             highlightWeekends={this.props.highlightWeekends}
                             locale={this.props.locale}
-                            minDate={this.props.minDate}
-                            maxDate={this.props.maxDate}
+                            minDate={moment(this.props.minDate)}
+                            maxDate={moment(this.props.maxDate)}
                             onChange={this.onDateChange}
                             style={{width: 300, height: 250}}
                             weekNumbers/>
