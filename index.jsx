@@ -18,9 +18,9 @@ let LOCALE = 'en';
 const App = React.createClass({
     displayName: 'App',
 
-    handleChange: function (newDate) {
-        window.console.log("newDate", moment(newDate).toISOString());
-        return this.setState({date: newDate});
+    handleChange: function (newDate, moment) {
+        window.console.log("newDate", newDate);
+        window.console.log("moment", moment);
     },
 
     onLocaleChange: function (event) {

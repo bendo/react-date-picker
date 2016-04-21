@@ -80,10 +80,19 @@ const DateTimeField = React.createClass({
         const formattedDate = moment(dateText).locale(this.props.locale || 'en').format('L');
         this.setState({inputValue: formattedDate});
         this.closePicker();
+        this.props.onChange(moment(dateText).format(), moment(dateText));
     },
 
-    onChange(e) {
-        return this.setState({defaultDate: e.target.value, inputValue: e.target.value});
+    onInputChange(e) {
+        const date = e.target.value;
+        if (moment(date, this.getLocaleDate().localeData().longDateFormat('L'), true).isValid()) {
+            const m = moment(date, this.getLocaleDate().localeData().longDateFormat('L'));
+            const d = m.format();
+            this.props.onChange(d, m);
+        } else {
+            this.props.onChange('', undefined);
+        }
+        return this.setState({defaultDate: date, inputValue: date});
     },
 
     closePicker() {
@@ -148,7 +157,7 @@ const DateTimeField = React.createClass({
                 </div>
 
                 <div className={'input-group date ' + this.size()} ref='datetimepicker'>
-                    <input className='form-control' onChange={this.onChange} type='text'
+                    <input className='form-control' onChange={this.onInputChange} type='text'
                            value={this.state.inputValue} {...this.props.inputProps}/>
                     <span className='input-group-addon' onBlur={this.onBlur} onClick={this.onClick} ref='dtpbutton'>
                         <span className={classNames('glyphicon', 'glyphicon-calendar')}/>
@@ -164,8 +173,8 @@ const DateTimeField = React.createClass({
         highlightWeekends: React.PropTypes.bool,
         minDate: React.PropTypes.object,
         maxDate: React.PropTypes.object,
-        onChange: React.PropTypes.func,
-        size: React.PropTypes.string
+        size: React.PropTypes.string,
+        onChange: React.PropTypes.func
     }
 });
 
