@@ -250,12 +250,12 @@
 .date-picker .dp-table .dp-cell:first-child {
   border-radius: 0;
   margin: 0;
-  border-right: 1px solid #aeaeae;
 }
 .date-picker .dp-table .dp-cell.dp-weeknumber,
 .date-picker .dp-table .dp-cell.dp-weeknumber:hover {
   background: none;
   cursor: auto;
+  border-right: 1px solid #aeaeae;
 }
 .date-picker .dp-table .dp-cell:hover {
   color: inherit;
