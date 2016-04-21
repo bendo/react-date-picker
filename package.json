@@ -1,8 +1,8 @@
 {
     "name": "react-date-picker",
-    "version": "4.8.1",
+    "version": "4.8.3",
     "description": "A carefully crafted date picker for React",
-    "main": "lib/index.js",
+    "main": "lib/DateTimeField.js",
     "scripts": {
         "test": "mocha --recursive --reporter spec --require should",
         "dev": "webpack-dev-server --progress --config build/webpack.config.js",

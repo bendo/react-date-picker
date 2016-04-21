@@ -1,1 +1,1 @@
-module.exports ='react-date-picker'
+module.exports ='react-date-picker';

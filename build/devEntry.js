@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = './index.jsx';
+module.exports = './DateTimeField.jsx';
