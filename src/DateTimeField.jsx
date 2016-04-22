@@ -175,8 +175,8 @@ const DateTimeField = React.createClass({
         date: React.PropTypes.string.isRequired,
         locale: React.PropTypes.string,
         highlightWeekends: React.PropTypes.bool,
-        minDate: React.PropTypes.object,
-        maxDate: React.PropTypes.object,
+        minDate: React.PropTypes.string,
+        maxDate: React.PropTypes.string,
         size: React.PropTypes.string,
         onChange: React.PropTypes.func
     }
