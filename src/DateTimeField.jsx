@@ -139,8 +139,8 @@ const DateTimeField = React.createClass({
                             grayElapsedDays={this.props.grayElapsedDays}
                             highlightWeekends={this.props.highlightWeekends}
                             locale={this.props.locale}
-                            minDate={moment(this.props.minDate)}
-                            maxDate={moment(this.props.maxDate)}
+                            minDate={this.props.minDate == undefined ? undefined : moment(this.props.minDate)}
+                            maxDate={this.props.minDate == undefined ? undefined : moment(this.props.maxDate)}
                             onChange={this.onDateChange}
                             style={{width: 300, height: 250}}
                             weekNumbers/>
