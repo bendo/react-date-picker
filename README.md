@@ -3,16 +3,7 @@ react-date-picker
 
 <!-- [![Circle CI](https://circleci.com/gh/zippyui/react-date-picker/tree/master.svg?style=svg)](https://circleci.com/gh/zippyui/react-date-picker/tree/master) -->
 
-<img src="http://npm.packagequality.com/badge/react-date-picker.png"/>
-
 > A date picker built especially for React, with love.
-
-[![Date picker](./react-date-picker.gif)](http://zippyui.github.io/react-date-picker)
-
-[![Date picker](./react-date-picker.png)](http://zippyui.github.io/react-date-picker)
-[![hackerone theme](./react-date-picker-theme-hackerone.png)](http://zippyui.github.io/react-date-picker)
-
-Click for [LIVE DEMO!](http://zippyui.github.io/react-date-picker)
 
 ## Install
 
@@ -24,25 +15,22 @@ $ npm install react-date-picker
 
 Require the css
 ```jsx
-
-require('react-date-picker/index.css');
-
-var DatePicker = require('react-date-picker');
-
+require('react-date-picker/date-picker.css');
+import DateTimeField from 'react-date-picker';
 ```
 
 ```jsx
-
 var date = '2014-10-10' //or Date.now()
 
 function onChange(dateString, moment){
     //...
 }
 
-<DatePicker
+<DateTimeField
     minDate='2014-04-04'
     maxDate='2015-10-10'
     date={date}
+    locale='en'
     onChange={onChange}
 />
 ```
@@ -69,12 +57,13 @@ first (which contains only structural css rules), and then any css theme file. F
 ```jsx
 require('react-date-picker/base.css');
 require('react-date-picker/theme/hackerone.css');
-var DatePicker = require('react-date-picker');
+import DateTimeField from 'react-date-picker';
 
-<DatePicker
+<DateTimeField
     minDate='2014-04-04'
     maxDate='2015-10-10'
     date={date}
+    locale='en'
     onChange={onChange}
 />
 ```
@@ -226,7 +215,7 @@ $ npm run dev
 # starts webpack-dev-server, which does all the bundling and live reloading
 ```
 
-Now navigate to [localhost:8080](http://localhost:8080)
+Now navigate to [localhost:8888](http://localhost:8888)
 With this setup, you have an environment which live-reloads all your changes, so you have a rapid development cycle.
 
 In order to build a new production version, make sure you run `npm run build` (it builds the `lib` directory from the `src` directory, it concats all files and builds the `dist` directory, and also prepares the css files)
@@ -242,30 +231,6 @@ If you don't use npm you can include any of the following:
  * `dist/react-date-picker.nomoment.js` - the full sources. NOTE: You'll need to include `React` AND `moment.js` separately
  * `dist/react-date-picker.nomoment.min.js` - minified & optimized version. NOTE: You'll need to include `React` AND `moment.js` separately
 
-## Tests
-
-For testing, it is required that you have [io.js](https://iojs.org/) installed. The tests rely on https://www.npmjs.com/package/jsdom for a DOM implementation, which only works in `io.js` and not `node.js`
-
-Before running tests, make sure you refresh the `lib` folder, which is built from the `src` folder (jsx is transpiled to normal js) by doing
-```sh
-$ npm run lib
-```
-
-Now you can safely run tests with
-```sh
-$ npm test
-```
-or
-```sh
-$ make
-```
-
-For watch mode, run
-```sh
-$ make test-w
-```
-
-`react-date-picker` is setup with `CircleCI` https://circleci.com/gh/zippyui/react-date-picker so every time a test fails we are notified on the failure.
 ## License
 
 #### MIT
