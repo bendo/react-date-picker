@@ -76,22 +76,18 @@ const DateTimeField = React.createClass({
         }
     },
 
-    toISO(date) {
-        return date.substring(0, date.length - 6) + '.000Z';
-    },
-
     onDateChange(dateText) {
         const formattedDate = moment(dateText).locale(this.props.locale || 'en').format('L');
         this.setState({inputValue: formattedDate});
         this.closePicker();
-        this.props.onChange(this.toISO(moment(dateText).format()), moment(dateText));
+        this.props.onChange(moment(dateText).format('YYYY-MM-DD'), moment(dateText));
     },
 
     onInputChange(e) {
         const date = e.target.value;
         if (moment(date, this.getLocaleDate().localeData().longDateFormat('L'), true).isValid()) {
             const m = moment(date, this.getLocaleDate().localeData().longDateFormat('L'));
-            const d = this.toISO(m.format());
+            const d = m.format('YYYY-MM-DD');
             this.props.onChange(d, m);
         } else {
             this.props.onChange('', undefined);
