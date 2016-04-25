@@ -4,7 +4,7 @@ require('./style/theme/bootstrap/index.styl');
 import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DatePicker from './src/index';
+import DatePicker from './src/DatePicker';
 import DateTimeField from './src/DateTimeField';
 
 let range = ['2016-02-01', '2016-02-09'];

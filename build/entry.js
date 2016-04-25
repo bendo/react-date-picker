@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = './src/index.jsx';
+module.exports = './src/DatePicker.jsx';

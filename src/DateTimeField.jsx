@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
 import Size from './utils/Size';
-import DatePicker from './index';
+import DatePicker from './DatePicker';
 
 
 const DateTimeField = React.createClass({
