@@ -140,8 +140,10 @@ const DateTimeField = React.createClass({
                             highlightWeekends={this.props.highlightWeekends}
                             locale={this.props.locale}
                             minDate={this.props.minDate == undefined ? undefined : moment(this.props.minDate)}
-                            maxDate={this.props.minDate == undefined ? undefined : moment(this.props.maxDate)}
+                            maxDate={this.props.maxDate == undefined ? undefined : moment(this.props.maxDate)}
                             onChange={this.onDateChange}
+                            todayText={this.props.todayText}
+                            closeText={this.props.closeText}
                             style={{width: 300, height: 250}}
                             weekNumbers/>
             </li>

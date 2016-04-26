@@ -50,6 +50,8 @@ const App = React.createClass({
                                locale={LOCALE}
                                minDate={minDate}
                                maxDate={maxDate}
+                               todayText="dnes"
+                               closeText="zavri"
                                onChange={this.handleChange}
                                size="sm" // check
                 />
