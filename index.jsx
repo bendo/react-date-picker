@@ -5,7 +5,7 @@ import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DatePicker from './src/DatePicker';
-import DateTimeField from './src/DateTimeField';
+import DateField from './src/DateField';
 
 let range = ['2016-02-01', '2016-02-09'];
 let date = moment().add(2, 'days').format('YYYY-MM-DD');
@@ -45,15 +45,15 @@ const App = React.createClass({
                     </select>
                 </p>
 
-                <DateTimeField date={date}
-                               highlightWeekends={true}
-                               locale={LOCALE}
-                               minDate={minDate}
-                               maxDate={maxDate}
-                               todayText="dnes"
-                               closeText="zavri"
-                               onChange={this.handleChange}
-                               size="sm" // check
+                <DateField date={date}
+                           highlightWeekends={true}
+                           locale={LOCALE}
+                           minDate={minDate}
+                           maxDate={maxDate}
+                           todayText="dnes"
+                           closeText="zavri"
+                           onChange={this.handleChange}
+                           size="sm" // check
                 />
 
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -63,11 +63,11 @@ const App = React.createClass({
                     with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
                     publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 
-                <DateTimeField date={date2}
-                               highlightWeekends={true}
-                               locale={LOCALE}
-                               onChange={this.handleChange}
-                               size="sm" // check
+                <DateField date={date2}
+                           highlightWeekends={true}
+                           locale={LOCALE}
+                           onChange={this.handleChange}
+                           size="sm" // check
                 />
 
             </div>

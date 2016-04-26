@@ -7,7 +7,7 @@ module.exports = {
     output: {
         path         : __dirname + "/../dist",
         libraryTarget: 'umd',
-        library      : 'DateTimeField',
+        library      : 'DateField',
         filename     : require('../DIST_FILE_NAME') + '.nomoment.js'
     },
     module: {

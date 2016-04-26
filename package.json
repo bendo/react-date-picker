@@ -1,8 +1,8 @@
 {
-    "name": "react-date-picker",
-    "version": "4.8.5",
-    "description": "A carefully crafted date picker for React",
-    "main": "lib/DateTimeField.js",
+    "name": "conj-react-date-picker",
+    "version": "1.0.2",
+    "description": "Date picker for React",
+    "main": "lib/DateField.js",
     "scripts": {
         "test": "mocha --recursive --reporter spec --require should",
         "dev": "webpack-dev-server --progress --config build/webpack.config.js",
@@ -67,9 +67,5 @@
         "react",
         "react-date-picker",
         "react-component"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/zippyui/react-date-picker.git"
-    }
+    ]
 }

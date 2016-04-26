@@ -5,7 +5,7 @@ import Size from './utils/Size';
 import DatePicker from './DatePicker';
 
 
-const DateTimeField = React.createClass({
+const DateField = React.createClass({
     getInitialState() {
         return {
             showPicker: false,
@@ -170,14 +170,16 @@ const DateTimeField = React.createClass({
     },
 
     propTypes: {
+        closeText: React.PropTypes.string,
         date: React.PropTypes.string.isRequired,
         locale: React.PropTypes.string,
         highlightWeekends: React.PropTypes.bool,
-        minDate: React.PropTypes.string,
         maxDate: React.PropTypes.string,
+        minDate: React.PropTypes.string,
+        onChange: React.PropTypes.func,
         size: React.PropTypes.string,
-        onChange: React.PropTypes.func
+        todayText: React.PropTypes.string
     }
 });
 
-export default DateTimeField
+export default DateField
