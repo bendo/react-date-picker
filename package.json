@@ -1,6 +1,6 @@
 {
     "name": "conj-react-date-picker",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Date picker for React",
     "main": "lib/DateField.js",
     "scripts": {

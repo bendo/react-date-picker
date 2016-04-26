@@ -16,7 +16,7 @@ $ npm install react-date-picker
 Require the css
 ```jsx
 require('react-date-picker/date-picker.css');
-import DateTimeField from 'react-date-picker';
+import DateField from 'react-date-picker';
 ```
 
 ```jsx
@@ -26,7 +26,7 @@ function onChange(dateString, moment){
     //...
 }
 
-<DateTimeField
+<DateField
     minDate='2014-04-04'
     maxDate='2015-10-10'
     date={date}
@@ -57,9 +57,9 @@ first (which contains only structural css rules), and then any css theme file. F
 ```jsx
 require('react-date-picker/base.css');
 require('react-date-picker/theme/hackerone.css');
-import DateTimeField from 'react-date-picker';
+import DateField from 'react-date-picker';
 
-<DateTimeField
+<DateField
     minDate='2014-04-04'
     maxDate='2015-10-10'
     date={date}
@@ -230,7 +230,3 @@ If you don't use npm you can include any of the following:
  * `dist/react-date-picker.min.js` - minified & optimized version. NOTE: You'll need to include `React` separately
  * `dist/react-date-picker.nomoment.js` - the full sources. NOTE: You'll need to include `React` AND `moment.js` separately
  * `dist/react-date-picker.nomoment.min.js` - minified & optimized version. NOTE: You'll need to include `React` AND `moment.js` separately
-
-## License
-
-#### MIT
